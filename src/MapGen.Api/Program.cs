@@ -6,6 +6,8 @@ builder.Services.AddSingleton<WorldGenerator>();
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
+app.UseDefaultFiles();
+app.UseStaticFiles();
 app.MapOpenApi();
 app.MapMapEndpoints();
 
