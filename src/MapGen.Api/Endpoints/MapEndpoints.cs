@@ -10,10 +10,22 @@ public static class MapEndpoints
 {
     public static IEndpointRouteBuilder MapMapEndpoints(this IEndpointRouteBuilder app)
     {
-        var maps = app.MapGroup("/api/maps");
-        maps.MapGet("/{seed}", GetMap);
-        maps.MapGet("/{seed}/image", GetMapImage);
-        maps.MapGet("/{seed}/stats", GetMapStatistics);
+        var maps = app.MapGroup("/api/maps").WithTags("Maps");
+
+        maps.MapGet("/{seed}", GetMap)
+            .WithName("GetMap")
+            .WithSummary("Generates a map for the given seed")
+            .WithDescription("Returns tiles and zones as rows of symbols, the Heart position and three shrines. Width and height must be between 32 and 256 (default 96).");
+
+        maps.MapGet("/{seed}/image", GetMapImage)
+            .WithName("GetMapImage")
+            .WithSummary("Renders the map as a PNG image")
+            .WithDescription("Scale is the number of pixels per tile, between 1 and 16 (default 4).");
+
+        maps.MapGet("/{seed}/stats", GetMapStatistics)
+            .WithName("GetMapStatistics")
+            .WithSummary("Returns tile and zone statistics of the map");
+
         return app;
     }
 
