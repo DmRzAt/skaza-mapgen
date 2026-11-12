@@ -1,0 +1,12 @@
+artifacts/
+bin/
+obj/
+TestResults/
+.vs/
+.idea/
+*.user
+*.suo
+
+Thumbs.db
+desktop.ini
+.DS_Store

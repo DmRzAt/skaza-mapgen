@@ -1,0 +1,7 @@
+{
+  "name": "com.skaza.mapgen",
+  "version": "0.1.0",
+  "displayName": "Skaza Map Generator",
+  "description": "Deterministic, seed-based procedural 2D map generator.",
+  "unity": "6000.3"
+}
