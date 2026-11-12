@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Skaza – generator map</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English&family=Alegreya+Sans:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="layout">
+    <section class="plate" aria-labelledby="page-title">
+      <header class="plate-header">
+        <h1 id="page-title">Skaza</h1>
+        <p class="subtitle">Proceduralny generator map 2D. To samo ziarno zawsze daje tę samą dolinę.</p>
+      </header>
+
+      <figure class="map-frame">
+        <canvas id="map-canvas" width="96" height="96" role="img" aria-label="Wygenerowana mapa"></canvas>
+        <p id="map-status" class="map-status" role="status">Wpisz ziarno i wygeneruj mapę.</p>
+      </figure>
+      <p id="tile-readout" class="readout" aria-live="polite">Najedź na mapę, aby zobaczyć pole.</p>
+    </section>
+
+    <aside class="panel" aria-label="Ustawienia mapy">
+      <form id="map-form" novalidate>
+        <div class="field">
+          <label for="seed">Ziarno (seed)</label>
+          <input id="seed" name="seed" type="text" inputmode="numeric" autocomplete="off" value="42" required>
+          <p class="field-error" id="seed-error" role="alert"></p>
+        </div>
+
+        <div class="size-row">
+          <div class="field">
+            <label for="width">Szerokość</label>
+            <input id="width" name="width" type="number" min="32" max="256" value="96" required>
+            <p class="field-error" id="width-error" role="alert"></p>
+          </div>
+          <div class="field">
+            <label for="height">Wysokość</label>
+            <input id="height" name="height" type="number" min="32" max="256" value="96" required>
+            <p class="field-error" id="height-error" role="alert"></p>
+          </div>
+        </div>
+        <p class="hint">Rozmiar od 32 do 256 pól.</p>
+
+        <div class="actions">
+          <button type="submit" class="primary">Generuj mapę</button>
+          <button type="button" id="random-seed">Losowe ziarno</button>
+        </div>
+      </form>
+
+      <section aria-labelledby="legend-title">
+        <h2 id="legend-title">Legenda</h2>
+        <ul class="legend">
+          <li><span class="swatch" style="--c:#7a8a54"></span>Łąka</li>
+          <li><span class="swatch" style="--c:#345230"></span>Las</li>
+          <li><span class="swatch" style="--c:#4e5c60"></span>Bagno</li>
+          <li><span class="swatch" style="--c:#464240"></span>Skała</li>
+          <li><span class="swatch" style="--c:#6e6076"></span>Głęboka skaza (wokół Serca)</li>
+          <li><span class="swatch" style="--c:#dc3cc8"></span>Serce Skazy</li>
+          <li><span class="swatch" style="--c:#f0d25a"></span>Kapliczka</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="stats-title">
+        <h2 id="stats-title">Statystyki</h2>
+        <dl id="stats" class="stats">
+          <div><dt>Pola przechodnie</dt><dd id="stat-walkable">–</dd></div>
+          <div><dt>Łąka</dt><dd id="stat-meadow">–</dd></div>
+          <div><dt>Las</dt><dd id="stat-forest">–</dd></div>
+          <div><dt>Bagno</dt><dd id="stat-swamp">–</dd></div>
+          <div><dt>Skała</dt><dd id="stat-rock">–</dd></div>
+          <div><dt>Kapliczki</dt><dd id="stat-shrines">–</dd></div>
+        </dl>
+      </section>
+
+      <section aria-labelledby="downloads-title">
+        <h2 id="downloads-title">Pobierz</h2>
+        <p class="downloads">
+          <a id="download-png" href="#" download>Obraz PNG</a>
+          <a id="open-json" href="#" target="_blank" rel="noopener">Dane JSON</a>
+        </p>
+      </section>
+    </aside>
+  </main>
+
+  <script src="app.js" type="module"></script>
+</body>
+</html>

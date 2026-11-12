@@ -1,0 +1,275 @@
+:root {
+  --peat: #23281f;
+  --moss: #2f3529;
+  --bone: #d9d3bf;
+  --lichen: #9aa57f;
+  --skaza: #9b5cc4;
+  --skaza-deep: #7a4498;
+  --error: #e8a27a;
+
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "Alegreya Sans", "Segoe UI", system-ui, sans-serif;
+
+  --step-0: 1rem;
+  --step-1: 1.25rem;
+  --step-4: 3.5rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--peat);
+  color: var(--bone);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.5;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 20rem;
+  gap: 2.5rem;
+  max-width: 76rem;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 3rem;
+}
+
+.plate-header h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--step-4);
+  line-height: 1;
+  letter-spacing: 0.01em;
+}
+
+.subtitle {
+  margin: 0.5rem 0 1.5rem;
+  color: var(--lichen);
+  max-width: 34rem;
+}
+
+.map-frame {
+  position: relative;
+  margin: 0;
+  padding: 0.6rem;
+  border: 1px solid var(--lichen);
+  outline: 1px solid rgba(154, 165, 127, 0.35);
+  outline-offset: 0.35rem;
+  background: #1b1f18;
+}
+
+#map-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+  cursor: crosshair;
+}
+
+.map-status {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  color: var(--lichen);
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  pointer-events: none;
+}
+
+.map-status:empty {
+  display: none;
+}
+
+.readout {
+  margin: 1.1rem 0 0;
+  min-height: 1.5em;
+  color: var(--lichen);
+  font-variant-numeric: tabular-nums;
+}
+
+.panel {
+  align-self: start;
+  padding: 1.5rem;
+  background: var(--moss);
+  border-top: 3px solid var(--skaza);
+}
+
+.panel h2 {
+  margin: 1.75rem 0 0.6rem;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--step-1);
+}
+
+.field {
+  display: grid;
+  gap: 0.3rem;
+  margin-bottom: 0.9rem;
+}
+
+.field label {
+  font-weight: 500;
+}
+
+.field input {
+  width: 100%;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--lichen);
+  border-radius: 2px;
+  background: var(--peat);
+  color: var(--bone);
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+}
+
+.field input[aria-invalid="true"] {
+  border-color: var(--error);
+}
+
+.field-error {
+  margin: 0;
+  min-height: 0;
+  color: var(--error);
+  font-size: 0.9rem;
+}
+
+.field-error:empty {
+  display: none;
+}
+
+.size-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.size-row .field {
+  margin-bottom: 0;
+}
+
+.hint {
+  margin: 0.4rem 0 1.1rem;
+  color: var(--lichen);
+  font-size: 0.9rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+button {
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--lichen);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--bone);
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+button.primary {
+  border-color: var(--skaza);
+  background: var(--skaza);
+  color: #1b1320;
+  font-weight: 700;
+}
+
+button.primary:hover {
+  background: var(--skaza-deep);
+  color: var(--bone);
+}
+
+button:not(.primary):hover {
+  border-color: var(--bone);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+:focus-visible {
+  outline: 2px solid var(--skaza);
+  outline-offset: 2px;
+}
+
+.legend {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.swatch {
+  flex: none;
+  width: 1rem;
+  height: 1rem;
+  background: var(--c);
+  border: 1px solid rgba(217, 211, 191, 0.25);
+}
+
+.stats {
+  display: grid;
+  gap: 0.25rem;
+  margin: 0;
+}
+
+.stats div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.stats dt {
+  color: var(--lichen);
+}
+
+.stats dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.downloads {
+  display: flex;
+  gap: 1.25rem;
+  margin: 0;
+}
+
+.downloads a {
+  color: var(--bone);
+  text-decoration-color: var(--skaza);
+  text-underline-offset: 0.2em;
+}
+
+.downloads a:hover {
+  color: var(--skaza);
+}
+
+@media (max-width: 860px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+    padding: 1.5rem 1rem 2rem;
+  }
+
+  .plate-header h1 {
+    font-size: 2.6rem;
+  }
+}
