@@ -2,6 +2,9 @@
   <Folder Name="/src/">
     <Project Path="src/MapGen.Core/MapGen.Core.csproj" />
   </Folder>
+  <Folder Name="/src/MapGen.Api/">
+    <Project Path="src/MapGen.Api/Skaza.MapGen.Api.csproj" />
+  </Folder>
   <Folder Name="/tests/" />
   <Folder Name="/tests/MapGen.UnitTests/">
     <Project Path="tests/MapGen.UnitTests/Skaza.MapGen.UnitTests.csproj" />
