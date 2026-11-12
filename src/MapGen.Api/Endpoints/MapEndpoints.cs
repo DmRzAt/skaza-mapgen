@@ -13,7 +13,19 @@ public static class MapEndpoints
         var maps = app.MapGroup("/api/maps");
         maps.MapGet("/{seed}", GetMap);
         maps.MapGet("/{seed}/image", GetMapImage);
+        maps.MapGet("/{seed}/stats", GetMapStatistics);
         return app;
+    }
+
+    private static Results<Ok<MapStatisticsResponse>, ValidationProblem> GetMapStatistics(ulong seed, int? width, int? height, WorldGenerator generator)
+    {
+        if (!MapRequestValidator.TryCreateSettings(width, height, out MapSettings settings, out var errors))
+        {
+            return TypedResults.ValidationProblem(errors);
+        }
+
+        GeneratedMap map = generator.Generate(seed, settings);
+        return TypedResults.Ok(MapResponseMapper.ToStatisticsResponse(map));
     }
 
     private static Results<Ok<MapResponse>, ValidationProblem> GetMap(ulong seed, int? width, int? height, WorldGenerator generator)

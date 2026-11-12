@@ -34,6 +34,21 @@ public static class MapResponseMapper
             Legend(ZoneSymbols));
     }
 
+    public static MapStatisticsResponse ToStatisticsResponse(GeneratedMap map)
+    {
+        MapStatistics statistics = MapStatistics.Calculate(map);
+        return new MapStatisticsResponse(
+            map.Seed,
+            map.Width,
+            map.Height,
+            statistics.TotalTiles,
+            statistics.WalkableTiles,
+            Math.Round(statistics.WalkableShare, 4),
+            statistics.TileCounts.ToDictionary(pair => pair.Key.ToString(), pair => pair.Value),
+            statistics.ZoneCounts.ToDictionary(pair => pair.Key.ToString(), pair => pair.Value),
+            map.Shrines.Count);
+    }
+
     private static IReadOnlyList<string> BuildRows(GeneratedMap map, Func<GridPosition, char> symbolAt)
     {
         var rows = new List<string>(map.Height);
