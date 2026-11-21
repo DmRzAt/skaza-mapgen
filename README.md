@@ -69,7 +69,7 @@ Katalog: [`tests/MapGen.UnitTests`](tests/MapGen.UnitTests). 36 metod testowych,
 | [`SimRandomTests.cs`](tests/MapGen.UnitTests/SimRandomTests.cs) | Generator PCG32: wartości referencyjne, powtarzalność, zakresy liczb |
 | [`WorldGridTests.cs`](tests/MapGen.UnitTests/WorldGridTests.cs) | Siatka mapy: granice, odczyt i zapis pól, pola przechodnie |
 | [`GridPositionTests.cs`](tests/MapGen.UnitTests/GridPositionTests.cs) | Pozycja na siatce: równość i hash |
-| [`GeneratorPartsTests.cs`](tests/MapGen.UnitTests/GeneratorPartsTests.cs) | Kroki generatora: szum, strefy, skały, spójność |
+| [`GeneratorPartsTests.cs`](tests/MapGen.UnitTests/GeneratorPartsTests.cs) | Części generatora: zakres rozmiaru mapy, szum, strefy, spójność |
 | [`WorldGeneratorTests.cs`](tests/MapGen.UnitTests/WorldGeneratorTests.cs) | Cała mapa: powtarzalność, rozmiar, Serce, osiągalność, kapliczki, brzeg ze skał |
 | [`MapStatisticsTests.cs`](tests/MapGen.UnitTests/MapStatisticsTests.cs) | Statystyki mapy: liczby pól, pola przechodnie |
 
