@@ -16,12 +16,12 @@ Proceduralny generator map 2D (seed) z REST API i podglądem
 
 Aplikacja generuje mapę doliny 2D na podstawie ziarna (seed). To samo ziarno i ten sam rozmiar zawsze dają identyczną mapę. Mapę można obejrzeć w przeglądarce, pobrać jako PNG albo odczytać jako JSON przez REST API.
 
-Generator jest częścią gry „Skaza”, rozwijanej w ramach pracy inżynierskiej. Biblioteka `MapGen.Core` nie zależy od żadnego silnika, dlatego ten sam kod działa w tym API i jako lokalny pakiet w projekcie Unity.
+Generator jest częścią gry „Zielarz: Dolina Zarazy”, rozwijanej w ramach pracy inżynierskiej. W kodzie i nazwie repozytorium zostaje robocza nazwa gry „Skaza” (np. przestrzeń nazw `Skaza.MapGen`). Biblioteka `MapGen.Core` nie zależy od żadnego silnika, dlatego ten sam kod działa w tym API i jako lokalny pakiet w projekcie Unity.
 
 Mapa powstaje w sześciu krokach:
 
 1. **Ziarno i PCG32.** Własny generator liczb pseudolosowych daje ten sam ciąg liczb na każdym komputerze.
-2. **Strefy.** Odległość od Serca Skazy (środek mapy) z dodatkiem szumu dzieli mapę na trzy pierścienie: czyste ziemie, pogranicze i głęboką skazę.
+2. **Strefy.** Odległość od Serca Zarazy (środek mapy) z dodatkiem szumu dzieli mapę na trzy pierścienie: czyste ziemie, pogranicze i głęboką zarazę.
 3. **Biomy.** Dwie warstwy szumu wartości (po 3 oktawy) wybierają łąkę, las albo bagno.
 4. **Skały.** Automat komórkowy: 30% losowych skał i 3 przejścia wygładzania, a brzeg mapy jest zawsze skałą.
 5. **Spójność.** Przeszukiwanie wszerz (BFS) od Serca zamienia w skałę miejsca, do których nie da się dojść.
@@ -165,8 +165,8 @@ Warunek wspólny dla wszystkich przypadków: aplikacja jest uruchomiona poleceni
 | TC-04 | Losowe ziarno | Strona jest otwarta | 1. Kliknij „Losowe ziarno” | W polu „Ziarno” pojawia się nowa liczba. Wyświetla się nowa mapa, a adres strony zawiera nowe ziarno |
 | TC-05 | Walidacja niepoprawnego ziarna | Strona jest otwarta i wyświetla mapę | 1. Wpisz ziarno `abc`<br>2. Kliknij „Generuj mapę” | Pod polem pojawia się komunikat „Ziarno to liczba całkowita od 0 do 18446744073709551615.” Pole jest oznaczone jako błędne. Mapa i adres strony się nie zmieniają |
 | TC-06 | Walidacja rozmiaru mapy | Strona jest otwarta | 1. Wpisz poprawne ziarno `42`<br>2. Wpisz szerokość `20` i wysokość `300`<br>3. Kliknij „Generuj mapę” | Pod polami pojawiają się komunikaty „Szerokość musi być liczbą od 32 do 256.” i „Wysokość musi być liczbą od 32 do 256.” Pod polem ziarna nie ma błędu. Mapa się nie zmienia |
-| TC-07 | Podgląd pola pod kursorem | Wyświetlona jest mapa dla ziarna 42 i rozmiaru 96 × 96 | 1. Najedź kursorem na różowy punkt w środku mapy<br>2. Zjedź kursorem z mapy | Po kroku 1 pod mapą widać „(48, 48) Serce Skazy, głęboka skaza”. Po kroku 2 widać „Najedź na mapę, aby zobaczyć pole.” |
-| TC-08 | Pobranie mapy jako PNG | Wyświetlona jest mapa dla ziarna 42 i rozmiaru 96 × 96 | 1. Kliknij „Obraz PNG” | Pobiera się plik `skaza-42.png`. Obraz ma rozmiar 768 × 768 pikseli (8 pikseli na pole) i przedstawia tę samą mapę |
+| TC-07 | Podgląd pola pod kursorem | Wyświetlona jest mapa dla ziarna 42 i rozmiaru 96 × 96 | 1. Najedź kursorem na różowy punkt w środku mapy<br>2. Zjedź kursorem z mapy | Po kroku 1 pod mapą widać „(48, 48) Serce Zarazy, głęboka zaraza”. Po kroku 2 widać „Najedź na mapę, aby zobaczyć pole.” |
+| TC-08 | Pobranie mapy jako PNG | Wyświetlona jest mapa dla ziarna 42 i rozmiaru 96 × 96 | 1. Kliknij „Obraz PNG” | Pobiera się plik `zielarz-42.png`. Obraz ma rozmiar 768 × 768 pikseli (8 pikseli na pole) i przedstawia tę samą mapę |
 | TC-09 | Otwarcie danych JSON | Wyświetlona jest mapa dla ziarna 42 i rozmiaru 96 × 96 | 1. Kliknij „Dane JSON” | W nowej karcie otwiera się JSON z polami `seed: 42`, `width: 96`, `height: 96`, `heart: {x: 48, y: 48}`, 96 wierszami `tiles` i 3 kapliczkami |
 | TC-10 | Otwarcie linku z parametrami | Strona nie jest otwarta | 1. Otwórz `http://localhost:5186/?seed=2024&width=64&height=64` | Formularz ma wartości ziarno 2024, szerokość 64 i wysokość 64. Wyświetla się mapa 64 × 64 dla tego ziarna |
 | TC-11 | Komunikat przy niedziałającym serwerze | Strona jest otwarta i wyświetla mapę | 1. Zatrzymaj aplikację (Ctrl+C w terminalu)<br>2. Wpisz ziarno `555`<br>3. Kliknij „Generuj mapę” | Pojawia się komunikat „Serwer nie odpowiada. Sprawdź, czy aplikacja działa, i spróbuj ponownie.” Przycisk „Generuj mapę” znowu jest aktywny |
