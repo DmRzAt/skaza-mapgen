@@ -12,7 +12,7 @@ const HEART_COLOR = [220, 60, 200];
 const SHRINE_COLOR = [240, 210, 90];
 
 const TILE_NAMES = { m: "Łąka", f: "Las", s: "Bagno", r: "Skała" };
-const ZONE_NAMES = { c: "czyste ziemie", b: "pogranicze", d: "głęboka skaza" };
+const ZONE_NAMES = { c: "czyste ziemie", b: "pogranicze", d: "głęboka zaraza" };
 
 const form = document.querySelector("#map-form");
 const seedInput = document.querySelector("#seed");
@@ -190,7 +190,7 @@ function showStats(stats) {
 
 function updateLinks(values) {
   pngLink.href = `/api/maps/${values.seed}/image?${query(values)}&scale=${DOWNLOAD_SCALE}`;
-  pngLink.download = `skaza-${values.seed}.png`;
+  pngLink.download = `zielarz-${values.seed}.png`;
   jsonLink.href = `/api/maps/${values.seed}?${query(values)}`;
 }
 
@@ -207,7 +207,7 @@ function describeTile(event) {
 
   let name = TILE_NAMES[currentMap.tiles[y][x]];
   if (x === currentMap.heart.x && y === currentMap.heart.y) {
-    name = "Serce Skazy";
+    name = "Serce Zarazy";
   } else if (currentMap.shrines.some((shrine) => shrine.x === x && shrine.y === y)) {
     name = "Kapliczka";
   }
